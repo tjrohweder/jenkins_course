@@ -17,27 +17,25 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-        stage ('success'){
-            steps {
-                script {
-                    currentBuild.result = 'SUCCESS'
-                }
-            }
-        }
-    }
 
     post {
         failure {
-            script {
-                currentBuild.result = 'FAILURE'
+            emailext (
+                subject: "$(env.JOB_NAME) na build [${env.BUILD_NUMBER}] Falhou!",
+                body: "Verifique a saída da console do $(env.JOB_NAME) em [${env.BUILD_URL}] ",
+                to: "tjrohweder@gmail.com"
             }
-        }
-
-        always {
-            step([$class: 'Mailer',
-                notifyEveryUnstableBuild: true,
-                recipients: "tjrohweder@gmail.com",
-                sendToIndividuals: true])
-        }
+        }   
+    }
+ 
+    
+    post {
+        failure {
+            emailext (
+                subject: "$(env.JOB_NAME) na build [${env.BUILD_NUMBER}] Falhou!",
+                body: "Verifique a saída da console do $(env.JOB_NAME) em [${env.BUILD_URL}] ",
+                to: "tjrohweder@gmail.com"
+            }
+        }   
     }
 }
