@@ -19,10 +19,10 @@ pipeline {
         }
 
     post {
-        failure {
+        success {
             emailext (
-                subject: "$(env.JOB_NAME) na build [${env.BUILD_NUMBER}] Falhou!",
-                body: "Verifique a saída da console do $(env.JOB_NAME) em [${env.BUILD_URL}] ",
+                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] foi deployado com sucesso :D",
+                body: "Verifique a saída da console do ${env.JOB_NAME} em [${env.BUILD_URL}] ",
                 to: "tjrohweder@gmail.com"
             }
         }   
@@ -32,10 +32,10 @@ pipeline {
     post {
         failure {
             emailext (
-                subject: "$(env.JOB_NAME) na build [${env.BUILD_NUMBER}] Falhou!",
-                body: "Verifique a saída da console do $(env.JOB_NAME) em [${env.BUILD_URL}] ",
+                subject: "${env.JOB_NAME} na build [${env.BUILD_NUMBER}] Falhou!",
+                body: "Verifique a saída da console do ${env.JOB_NAME} em [${env.BUILD_URL}] ",
                 to: "tjrohweder@gmail.com"
             }
         }   
     }
-}
+}  
