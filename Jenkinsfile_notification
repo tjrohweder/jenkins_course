@@ -17,7 +17,7 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-
+    }
     post {
         success {
             emailext (
@@ -38,4 +38,4 @@ pipeline {
             )
         }   
     }
-}  
+} 
